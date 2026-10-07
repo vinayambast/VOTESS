@@ -8,8 +8,8 @@ function email_layout(string $title, string $inner, string $preheader = ''): str
 <span style="display:none;max-height:0;overflow:hidden">' . h($preheader) . '</span>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F2F2F2"><tr><td align="center" style="padding:24px 12px">
 <table role="presentation" width="640" cellpadding="0" cellspacing="0" style="max-width:640px;width:100%;background:#fff">
-<tr><td style="padding:20px 28px;border-bottom:4px solid #86BC25"><a href="' . $site . '"><img src="cid:logo" alt="VOTESS" width="168" style="display:block;border:0"></a></td></tr>
-<tr><td><img src="cid:banner" alt="VOTESS: one technology backbone for many brands" width="640" style="display:block;width:100%;height:auto;border:0"></td></tr>
+<tr><td style="padding:20px 28px;border-bottom:4px solid #86BC25;background:#ffffff"><a href="' . $site . '"><img src="cid:logo" alt="VOTESS" width="168" style="display:block;width:168px;max-width:168px;height:auto;border:0;outline:none;text-decoration:none"></a></td></tr>
+<tr><td style="background:#0b0d0c;line-height:0"><img src="cid:banner" alt="VOTESS: one technology backbone for many brands" width="640" style="display:block;width:100%;max-width:640px;height:auto;border:0;outline:none;text-decoration:none"></td></tr>
 <tr><td style="padding:28px"><h1 style="margin:0 0 16px;font-size:22px;line-height:1.3">' . h($title) . '</h1>' . $inner . '</td></tr>
 <tr><td style="background:#000;color:#BBBCBC;padding:20px 28px;font-size:12px;line-height:1.6">
 <b style="color:#fff">VOTESS</b> &middot; Virtual Operating Technology &amp; Enterprise Systems<br>

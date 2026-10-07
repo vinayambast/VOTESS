@@ -85,8 +85,23 @@ function db(): PDO {
 
 /* ---------- mail: SMTP (PHPMailer) and/or EmailJS ---------- */
 function assets_dir(): string {
-    foreach ([env('ASSETS_DIR'), __DIR__ . '/../../public_html/assets', __DIR__ . '/../../assets'] as $d) if ($d && is_file($d . '/logo.png')) return rtrim($d, '/') . '/';
-    return __DIR__ . '/../../public_html/assets/';
+    $docRoot = isset($_SERVER['DOCUMENT_ROOT']) ? rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') : '';
+    $candidates = [
+        env('ASSETS_DIR'),
+        __DIR__ . '/../../assets',
+        __DIR__ . '/../../public_html/assets',
+        __DIR__ . '/../../../public_html/assets',
+        $docRoot ? $docRoot . '/assets' : null,
+    ];
+    foreach ($candidates as $d) {
+        if (!$d) continue;
+        $d = rtrim($d, '/\\');
+        if (is_dir($d) && (is_file($d . '/email-banner.png') || is_file($d . '/logo.png') || is_file($d . '/logo.jpg') || is_file($d . '/logo-dark.png'))) {
+            return $d . '/';
+        }
+    }
+    if ($docRoot && is_dir($docRoot . '/assets')) return $docRoot . '/assets/';
+    return __DIR__ . '/../../assets/';
 }
 
 function smtp_send(array $to, string $subject, string $html, string $alt, ?string $replyTo, ?string $replyName): bool {
@@ -106,11 +121,39 @@ function smtp_send(array $to, string $subject, string $html, string $alt, ?strin
         if ($replyTo) $m->addReplyTo($replyTo, (string)$replyName);
         $m->isHTML(true);
         $m->Subject = $subject;
+
+        $d = assets_dir();
+        $attachedLogo = false;
+        $attachedBanner = false;
+
+        // Attach Logo (prefer PNG, then JPG)
+        foreach (['logo.png' => 'image/png', 'logo-dark.png' => 'image/png', 'logo.jpg' => 'image/jpeg', 'logo-dark.jpg' => 'image/jpeg'] as $f => $mime) {
+            if (is_file($d . $f)) {
+                $m->addEmbeddedImage($d . $f, 'logo', 'logo.png', 'base64', $mime);
+                $attachedLogo = true;
+                break;
+            }
+        }
+
+        // Attach Banner (prefer PNG, then JPG)
+        foreach (['email-banner.png' => 'image/png', 'email-banner.jpg' => 'image/jpeg', 'banner.png' => 'image/png'] as $f => $mime) {
+            if (is_file($d . $f)) {
+                $m->addEmbeddedImage($d . $f, 'banner', 'email-banner.png', 'base64', $mime);
+                $attachedBanner = true;
+                break;
+            }
+        }
+
+        // Safety fallback: if embedded images could not be loaded from disk, fall back to direct web URL
+        if (!$attachedLogo) {
+            $html = str_replace('cid:logo', site_url() . '/assets/logo.png', $html);
+        }
+        if (!$attachedBanner) {
+            $html = str_replace('cid:banner', site_url() . '/assets/email-banner.png', $html);
+        }
+
         $m->Body = $html;
         $m->AltBody = $alt;
-        $d = assets_dir();
-        if (is_file($d . 'logo.png')) $m->addEmbeddedImage($d . 'logo.png', 'logo', 'logo.png', 'base64', 'image/png');
-        if (is_file($d . 'email-banner.png')) $m->addEmbeddedImage($d . 'email-banner.png', 'banner', 'banner.png', 'base64', 'image/png');
         $m->send();
         return true;
     } catch (\Throwable $e) {
