@@ -25,8 +25,12 @@ if ($p && PHP_VERSION_ID >= 80100) {
               $r['table_leads'] = (bool)db()->query("SHOW TABLES LIKE 'leads'")->fetch();
               $r['table_payments'] = (bool)db()->query("SHOW TABLES LIKE 'payments'")->fetch();
         } catch (Throwable $e) { $r['db_connected'] = false; $r['db_error_code'] = (string)$e->getCode(); }
+        $dAssets = assets_dir();
+        $r['assets_dir'] = $dAssets;
+        $r['logo_found'] = is_file($dAssets . 'logo.png') || is_file($dAssets . 'logo-dark.png') || is_file($dAssets . 'logo.jpg');
+        $r['banner_found'] = is_file($dAssets . 'email-banner.png') || is_file($dAssets . 'email-banner.jpg');
         $key = env('HEALTH_KEY');
-        $authed = !$key || hash_equals($key, (string)($_GET['key'] ?? ''));
+        $authed = !$key || hash_equals((string)$key, (string)($_GET['key'] ?? ''));
         if (isset($_GET['smtp']) && $authed) {
             $m = new PHPMailer\PHPMailer\PHPMailer(true);
             $m->isSMTP(); $m->Host = (string)env('SMTP_HOST'); $m->Port = (int)env('SMTP_PORT', '465'); $m->SMTPAuth = true;
@@ -34,9 +38,13 @@ if ($p && PHP_VERSION_ID >= 80100) {
             $m->SMTPSecure = strtolower((string)env('SMTP_SECURE', 'ssl')) === 'tls' ? 'tls' : 'ssl';
             try { $r['smtp_login_ok'] = $m->smtpConnect(); $m->smtpClose(); } catch (Throwable $e) { $r['smtp_login_ok'] = false; $r['smtp_error'] = substr($e->getMessage(), 0, 160); }
         }
-        if (!empty($_GET['test_mail']) && $key && $authed) $r['test_mail_sent'] = send_mail([(string)$_GET['test_mail']], 'VOTESS test email', email_html_test());
+        if (!empty($_GET['test_mail']) && $authed) {
+            require_once $p . '/lib/templates.php';
+            $sampleInner = '<p style="font-size:15px;line-height:1.65;margin:0 0 14px">Hello,</p><p style="font-size:15px;line-height:1.65;margin:0 0 14px">This is a test email confirming that your SMTP connection, logo, and brand banner are rendering properly.</p>';
+            $testHtml = email_layout('VOTESS Template Verification', $sampleInner, 'Testing logo and banner delivery');
+            $r['test_mail_sent'] = send_mail([(string)$_GET['test_mail']], 'VOTESS Test: Logo & Banner Verification', $testHtml);
+        }
         $r['payment_gateways'] = function_exists('enabled_gateways') ? enabled_gateways() : 'open pay page to check';
     } catch (Throwable $e) { $r['error'] = substr($e->getMessage(), 0, 200); }
 }
-function email_html_test(): string { return '<p>This is a test email from the VOTESS website setup check.</p>'; }
 echo json_encode($r, JSON_PRETTY_PRINT);
