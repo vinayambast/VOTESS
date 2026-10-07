@@ -1,0 +1,11 @@
+# macOS metadata
+.DS_Store
+
+# Backup and zip archives
+*.zip
+
+# Sensitive local credentials (use private/.env.example instead)
+private/.env
+
+# Application logs
+private/logs/*.log

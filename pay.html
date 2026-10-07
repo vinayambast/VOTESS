@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pay online | VOTESS</title>
+<meta name="description" content="Pay VOTESS invoices securely with Razorpay, Cashfree, PayU, Easebuzz or UPI.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=8">
+<link rel="icon" type="image/jpeg" href="assets/favicon.jpg?v=8">
+</head>
+<body>
+<div id="prog"></div>
+<div id="hdr"></div>
+<main id="top">
+<div class="ph"><div class="wrap"><div class="crumb">VOTESS / Pay online</div><h1 data-split>Pay online.</h1><p>Secure payment for VOTESS invoices and services.</p></div></div><section><div class="wrap"><div id="ps"></div>
+<p class="lede" style="margin-top:0">Pay VOTESS invoices and service fees securely. This page is for VOTESS payments only. Nayibeej is a separate organisation and does not collect donations through VOTESS accounts.</p>
+<p class="hint" id="tm" hidden style="margin-top:1rem">Test mode is on. Payments here are not real.</p>
+<form class="fm" id="pf" novalidate>
+<label class="">Full name *<input type="text" name="name" placeholder="" autocomplete="name" required><span class="er" data-er="name"></span></label><label class="">Email for receipt *<input type="email" name="email" placeholder="" autocomplete="email" required><span class="er" data-er="email"></span></label><label class="">Mobile number (10 digits) *<input type="tel" name="phone" placeholder="" autocomplete="tel" required><span class="er" data-er="phone"></span></label><label class="">Amount (INR) *<input type="number" name="amount" placeholder="" autocomplete="" required><span class="er" data-er="amount"></span></label>
+<label class="">Paying for *<input type="text" name="purpose" placeholder="Invoice, service or product" autocomplete="" required><span class="er" data-er="purpose"></span></label><label class="">Invoice number (if any)<input type="text" name="invoice_no" placeholder="" autocomplete=""><span class="er" data-er="invoice_no"></span></label>
+<h3>Payment method</h3><div class="pg" id="gw" role="radiogroup" aria-label="Payment method"></div>
+<div class="full"><button class="btn" type="submit">Continue to payment</button><p class="er" id="fe" role="alert" style="margin-top:.6rem"></p></div></form>
+<div id="upi" hidden class="qr"><h2>Pay with UPI</h2><p>Amount: <b id="upi-amt"></b> to <b id="upi-vpa"></b></p><div id="qr"></div><a class="btn" id="upi-app" href="#">Open UPI app (phone)</a>
+<p>After paying, enter the 12-digit UTR / reference from your UPI app so we can match it.</p><label style="font-weight:600">UTR number<input id="utr" inputmode="numeric" maxlength="20" style="display:block;margin-top:.3rem;padding:.8rem;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)"></label><span class="er" id="utr-er"></span><button class="btn" id="utr-btn" type="button">I have paid</button></div></div></section>
+
+<!-- Payment Security & Invoicing section -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-intro">
+      <span style="font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Payment Protection</span>
+      <h2 style="margin-top:.4rem">Secure billing standards.</h2>
+      <p class="lede">Bank-grade security, instant tax invoices, and verified settlement pipelines.</p>
+    </div>
+    <div class="gv">
+      <div class="g">
+        <h3>🔒 256-Bit SSL Encryption</h3>
+        <p>All payment channels utilize end-to-end encrypted connections certified by PCI-DSS Level 1 authorized payment aggregators.</p>
+      </div>
+      <div class="g">
+        <h3>🧾 Automated GST Receipts</h3>
+        <p>A computer-generated tax invoice and receipt is automatically dispatched to your registered email address upon successful clearance.</p>
+      </div>
+      <div class="g">
+        <h3>💳 Multi-Mode Settlement</h3>
+        <p>We support all primary commercial payment methods: UPI (Google Pay, PhonePe, Paytm), RuPay, Visa, Mastercard, Net Banking, and NEFT/RTGS.</p>
+      </div>
+      <div class="g">
+        <h3>💬 Direct Billing Support</h3>
+        <p>Questions regarding an invoice reconciliation or payment status? Email our accounts team directly at <a href="mailto:info@votess.in" style="text-decoration:underline">info@votess.in</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="ftr"></div>
+<script src="assets/config.js?v=8"></script>
+<script src="assets/site.js?v=8"></script>
+<script src="assets/pay.js"></script>
+</body>
+</html>

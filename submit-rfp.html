@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Submit RFP | VOTESS</title>
+<meta name="description" content="Send VOTESS a request for proposal.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=8">
+<link rel="icon" type="image/jpeg" href="assets/favicon.jpg?v=8">
+</head>
+<body>
+<div id="prog"></div>
+<div id="hdr"></div>
+<main id="top">
+<div class="ph"><div class="wrap"><div class="crumb">VOTESS / Submit RFP</div><h1 data-split>Submit an RFP.</h1><p>Share your requirements and we will respond with a clear plan.</p></div></div><section><div class="wrap"><div class="steps"><div><h3>Submit</h3><p>Share the scope, budget and deadline.</p></div><div><h3>Review</h3><p>Our team reviews it and may ask questions.</p></div><div><h3>Respond</h3><p>We send a proposal by your deadline.</p></div></div><form class="fm" id="lf" data-purpose="rfp" novalidate>
+<h3 style="margin-top:0">Your details</h3><label class="">Full name *<input type="text" name="name" placeholder="" autocomplete="name" required><span class="er" data-er="name"></span></label><label class="">Work email *<input type="email" name="email" placeholder="" autocomplete="email" required><span class="er" data-er="email"></span></label><label class="">Phone / WhatsApp<input type="tel" name="phone" placeholder="+91 ..." autocomplete="tel"><span class="er" data-er="phone"></span></label><label class="">Your role<input type="text" name="designation" placeholder="" autocomplete="organization-title"><span class="er" data-er="designation"></span></label>
+<label class="">Organisation *<input type="text" name="company" placeholder="" autocomplete="" required><span class="er" data-er="company"></span></label><label class="">Organisation size<select name="org_size"><option value="">Select</option><option>1 to 10</option><option>11 to 50</option><option>51 to 200</option><option>201 to 1,000</option><option>1,000+</option></select><span class="er" data-er="org_size"></span></label><label class="">Country<input type="text" name="country" placeholder="India" autocomplete=""><span class="er" data-er="country"></span></label><label class="">City<input type="text" name="city" placeholder="" autocomplete=""><span class="er" data-er="city"></span></label>
+<h3>The RFP</h3><label class="full">Project title *<input type="text" name="sub_interest" placeholder="" autocomplete="" required><span class="er" data-er="sub_interest"></span></label><label class="full">Link to RFP document (optional)<input type="url" name="website" placeholder="https://" autocomplete=""><span class="er" data-er="website"></span></label><label class="">Indicative budget<select name="budget"><option value="">Select</option><option>Not sure yet</option><option>Under INR 1 lakh</option><option>INR 1 to 5 lakh</option><option>INR 5 to 25 lakh</option><option>INR 25 lakh to 1 crore</option><option>Above INR 1 crore</option></select><span class="er" data-er="budget"></span></label><label>Response deadline<input type="date" name="timeline"><span class="er" data-er="timeline"></span></label>
+<label class="full">Scope summary *<textarea name="message" rows="7" placeholder="What do you need, who will use it, and what does success look like?" required></textarea><span class="er" data-er="message"></span></label>
+<input type="hidden" name="preferred_contact" value="email"><label class="ck full"><input type="checkbox" name="consent_privacy" value="1"><span>I agree that VOTESS may contact me about this enquiry and store the details I have provided, as described in the <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="text-decoration:underline">privacy notice</a>. *</span></label><span class="er full" data-er="consent_privacy"></span>
+<label class="ck full"><input type="checkbox" name="consent_marketing" value="1"><span>I would like occasional updates from VOTESS (optional).</span></label>
+<input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign">
+<div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website_url" tabindex="-1" autocomplete="off"></label></div>
+<div class="full"><button class="btn" type="submit">Submit RFP</button><p class="er" id="fe" role="alert" style="margin-top:.6rem"></p></div></form></div></section>
+
+<!-- RFP Standards section -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-intro">
+      <span style="font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Evaluation Framework</span>
+      <h2 style="margin-top:.4rem">What happens after you submit?</h2>
+      <p class="lede">Our transparent, milestone-driven approach to reviewing client proposals.</p>
+    </div>
+    <div class="gv">
+      <div class="g">
+        <h3>🔒 Mutual Confidentiality</h3>
+        <p>All RFP documentation, architecture sketches, and project concepts submitted are treated as strictly confidential under default non-disclosure protocol.</p>
+      </div>
+      <div class="g">
+        <h3>📐 Technical Feasibility</h3>
+        <p>Our senior systems architects review your scope to recommend clean, reusable building blocks and flag potential bottlenecks early.</p>
+      </div>
+      <div class="g">
+        <h3>📋 Detailed Proposal</h3>
+        <p>You receive an itemized proposal containing a phased delivery roadmap, milestone deliverables, technology stack options, and transparent pricing.</p>
+      </div>
+      <div class="g">
+        <h3>⏱️ 3-Day Turnaround</h3>
+        <p>For standard institutional RFPs, our initial review and scoping questions are returned to your team within 3 business days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="ftr"></div>
+<script src="assets/config.js?v=8"></script>
+<script src="assets/site.js?v=8"></script>
+</body>
+</html>
